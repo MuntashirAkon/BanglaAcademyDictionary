@@ -1,5 +1,5 @@
 /**
- * Created by Mujtahid Akon on 3/29/2016.
+ * Created by Muntashir Akon on 3/29/2016.
  */
 var db;
 
@@ -45,7 +45,7 @@ function show_suggestions(word, suggestions){
         $("#suggestion").append("<div class='word" + selectedClass + "' onclick=\"$('#keyword').val($(this).html());show_result($(this).html());$('#otd').hide()\">" + suggestions[i][0] + "</div>");
     }
     // Scroll to the selected query
-    $("#suggestion").scrollTop($("#suggestion.selected").index()*20)
+    $("#suggestion").scrollTop($("#suggestion .selected").index()*20)
 }
 
 function generate_otd(){
