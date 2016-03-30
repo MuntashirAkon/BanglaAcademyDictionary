@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 function show_result(keyword){
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/www/p/dict/dictionary.db', true);
+    xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function(e) {
@@ -55,7 +55,7 @@ function generate_otd(){
         show_result(otd);
     }else{
         var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/www/p/dict/dictionary.db', true);
+    xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function(e) {
