@@ -24,7 +24,7 @@ function show_result(keyword){
         // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
         name = name[0].values[0][0];
         show_image(name);
-        var suggestions = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%'");
+        var suggestions = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword.charAt(0) + "%'");
         show_suggestions(name, suggestions[0].values);
     };
     xhr.send();
