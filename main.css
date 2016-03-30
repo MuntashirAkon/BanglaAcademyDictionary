@@ -1,0 +1,23 @@
+
+#keyword, #suggestion{
+    margin: 0px auto;
+    text-align: center;
+    display: block;
+}
+
+#suggestion, .result_set{
+    overflow: auto;
+}
+.selected{
+    background: #dddddd;
+    font-weight: 700;
+}
+
+.word{
+    cursor: pointer;
+    padding-left: 5px;
+    text-align: left;
+}
+.word:hover{
+    background: #dddddd;
+}
