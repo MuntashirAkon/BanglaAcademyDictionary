@@ -25,8 +25,8 @@ var Dictionary = function(){
         var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
         // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
         keyword = name[0].values[0][0];
-        show_image();
-        show_suggestions();
+        this.show_image();
+        this.show_suggestions();
     };
     this.show_image = function(){
         if (keyword != "") $("#result").attr("src", img_src + keyword);
@@ -40,7 +40,7 @@ var Dictionary = function(){
         var selectedClass = "";
         for(var i = 0; i < suggestions.length; i++){
             selectedClass = (suggestions[i][0] == word) ? " selected" : "";
-            $("#suggestion").append("<div class='word" + selectedClass + "' onclick=\"$('#keyword').val($(this).html());show_result($(this).html());$('#otd').hide()\">" + suggestions[i][0] + "</div>");
+            $("#suggestion").append("<div class='word" + selectedClass + "' onclick=\"$('#keyword').val($(this).html());dict.show_result($(this).html());$('#otd').hide()\">" + suggestions[i][0] + "</div>");
         }
         // Scroll to the selected query
         $("#suggestion").scrollTop($("#suggestion .selected").index()*20);
