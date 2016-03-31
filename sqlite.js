@@ -2,14 +2,7 @@
  * Created by Muntashir Akon on 3/29/2016.
  */
 
-$(document).ready(function(){
-    var w_height = $(window).height();
-    $("#suggestion").height(w_height-105);
-    $(".result_set").height(w_height-75);
-    $("#suggestion").width($("#keyword").width());
-    dict.db_connect();
-    dict.gen_otd();
-});
+
 
 var Dictionary = function(){
     var db_src = "/BanglaAcademyDictionary/dictionary.db";
@@ -90,3 +83,11 @@ var Cookie = function(){
 
 
 var dict = new Dictionary();
+$(document).ready(function(){
+    var w_height = $(window).height();
+    $("#suggestion").height(w_height-105);
+    $(".result_set").height(w_height-75);
+    $("#suggestion").width($("#keyword").width());
+    dict.db_connect();
+    dict.gen_otd();
+});
