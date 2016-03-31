@@ -1,7 +1,6 @@
 /**
  * Created by Muntashir Akon on 3/29/2016.
  */
-var dict = new Dictionary();
 
 $(document).ready(function(){
     var w_height = $(window).height();
@@ -88,3 +87,6 @@ var Cookie = function(){
         return "";
     };
 };
+
+
+var dict = new Dictionary();
