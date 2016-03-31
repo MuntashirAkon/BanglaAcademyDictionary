@@ -16,7 +16,7 @@ var Dictionary = function(){
     var db_src = "/BanglaAcademyDictionary/dictionary.db";
     var img_src = "https://raw.githubusercontent.com/mujtahid-akon/English-to-Bangla-Dictionary/master/images/";
     var db;
-    this.keyword;
+    var keyword;
     this.db_connect = function(){
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
@@ -29,19 +29,19 @@ var Dictionary = function(){
         xhr.send();
     };
     this.show_result = function(word){
-        this.keyword = word;
-        var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + this.keyword + "%' LIMIT 1");
+        keyword = word;
+        var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
         // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
-        this.keyword = name[0].values[0][0];
-        this.show_image();
-        this.show_suggestions();
+        keyword = name[0].values[0][0];
+        show_image();
+        show_suggestions();
     };
     this.show_image = function(){
-        if (this.keyword != "") $("#result").attr("src", this.img_src + this.keyword);
+        if (keyword != "") $("#result").attr("src", img_src + keyword);
         else $("#result").attr("alt", "Word Doesn't Exist");
     };
     this.show_suggestions = function(){
-        var suggestions = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + this.keyword.charAt(0) + "%'");
+        var suggestions = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword.charAt(0) + "%'");
         suggestions = suggestions[0].values;
         // First delete all of the suggestions
         $("#suggestion").html("");
