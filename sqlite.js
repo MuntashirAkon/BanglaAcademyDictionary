@@ -15,9 +15,9 @@ $(document).ready(function(){
     xhr.onload = function(e) {
         var uInt8Array = new Uint8Array(this.response);
         db = new SQL.Database(uInt8Array);
+        generate_otd();
     };
     xhr.send();
-    generate_otd();
 });
 
 function show_result(keyword){
