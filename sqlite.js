@@ -8,10 +8,6 @@ $(document).ready(function(){
     $("#suggestion").height(w_height-105);
     $(".result_set").height(w_height-75);
     $("#suggestion").width($("#keyword").width());
-    generate_otd();
-});
-
-function show_result(keyword){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
     xhr.responseType = 'arraybuffer';
@@ -19,15 +15,18 @@ function show_result(keyword){
     xhr.onload = function(e) {
         var uInt8Array = new Uint8Array(this.response);
         db = new SQL.Database(uInt8Array);
+    };
+    xhr.send();
+    generate_otd();
+});
 
+function show_result(keyword){
         var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
         // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
         name = name[0].values[0][0];
         show_image(name);
         var suggestions = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword.charAt(0) + "%'");
         show_suggestions(name, suggestions[0].values);
-    };
-    xhr.send();
 }
 
 function show_image(name){
