@@ -1,7 +1,7 @@
 /**
  * Created by Muntashir Akon on 3/29/2016.
  */
-var dict = Dictionary();
+var dict = new Dictionary();
 
 $(document).ready(function(){
     var w_height = $(window).height();
@@ -54,20 +54,20 @@ var Dictionary = function(){
         $("#suggestion").scrollTop($("#suggestion .selected").index()*20);
     };
     this.gen_otd = function(){
-    var cookie = new Cookie();
-    var today = (new Date()).getDay();
-    var otd;
-    if(cookie.get("d") == today) {
-        otd = cookie.get("0td");
-    }else{
-        var expire = 24*60*60;
-        otd = db.exec("SELECT entry FROM `dic_entries` WHERE length(entry) > 3 ORDER BY RANDOM() LIMIT 1");
-        otd = otd[0].values[0][0];
-        cookie.set("0td", otd, expire);
-        cookie.set("d", today, expire);
-    }
-    this.show_result(otd);
-}
+        var cookie = new Cookie();
+        var today = (new Date()).getDay();
+        var otd;
+        if(cookie.get("d") == today) {
+            otd = cookie.get("0td");
+        }else{
+            var expire = 24*60*60;
+            otd = db.exec("SELECT entry FROM `dic_entries` WHERE length(entry) > 3 ORDER BY RANDOM() LIMIT 1");
+            otd = otd[0].values[0][0];
+            cookie.set("0td", otd, expire);
+            cookie.set("d", today, expire);
+        }
+        this.show_result(otd);
+    };
 };
 
 var Cookie = function(){
