@@ -1,7 +1,7 @@
 /**
  * Created by Muntashir Akon on 3/29/2016.
  */
-var dict = new Dictionary();
+var dict = Dictionary();
 
 $(document).ready(function(){
     var w_height = $(window).height();
