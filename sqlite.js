@@ -17,7 +17,7 @@ var Dictionary = function(){
     var img_src = "https://raw.githubusercontent.com/mujtahid-akon/English-to-Bangla-Dictionary/master/images/";
     var db;
     this.keyword;
-    this.db_connect = function(){}{
+    this.db_connect = function(){
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
         xhr.responseType = 'arraybuffer';
