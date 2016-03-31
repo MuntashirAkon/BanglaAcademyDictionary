@@ -49,42 +49,35 @@ function show_suggestions(word, suggestions){
 }
 
 function generate_otd(){
+    var cookie = new Cookie();
     var today = (new Date()).getDay();
-    if(getCookie("d") == today) {
-        otd = getCookie("0td");
+    if(cookie.get("d") == today) {
+        otd = cookie.get("0td");
         show_result(otd);
     }else{
-        var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
-    xhr.responseType = 'arraybuffer';
-
-    xhr.onload = function(e) {
-        var uInt8Array = new Uint8Array(this.response);
-        db = new SQL.Database(uInt8Array);
         otd = db.exec("SELECT entry FROM `dic_entries` WHERE length(entry) > 3 ORDER BY RANDOM() LIMIT 1");
         otd = otd[0].values[0][0];
         show_result(otd);
-        setCookie("0td", otd, 1);
-        setCookie("d", today, 1);
+        cookie.set("0td", otd, 1);
+        cookie.set("d", today, 1);
+    }
+}
+
+var Cookie = function(){
+    this.set = function(name, value, expire) {
+        var d = new Date();
+        d.setTime(d.getTime() + (expire*1000));
+        expire = "expires="+d.toUTCString();
+        document.cookie = name + "=" + value + "; " + expire;
+    };
+    this.get = function(name) {
+        name = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    };
 };
-xhr.send();
-    }
-}
-
-function setCookie(name, value, expire_day) {
-    var d = new Date();
-    d.setTime(d.getTime() + (expire_day*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = name + "=" + value + "; " + expires;
-}
-
-function getCookie(name) {
-    name = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-    }
-    return "";
-}
