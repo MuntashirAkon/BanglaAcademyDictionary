@@ -19,6 +19,7 @@ var Dictionary = function(){
             db = new SQL.Database(uInt8Array);
         };
         xhr.send();
+        return true;
     };
     this.show_result = function(word){
         keyword = word;
@@ -88,6 +89,5 @@ $(document).ready(function(){
     $("#suggestion").height(w_height-105);
     $(".result_set").height(w_height-75);
     $("#suggestion").width($("#keyword").width());
-    dict.db_connect();
-    dict.gen_otd();
+    if(dict.db_connect()) dict.gen_otd();
 });
