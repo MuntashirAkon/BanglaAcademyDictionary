@@ -19,7 +19,6 @@ var Dictionary = function(){
             db = new SQL.Database(uInt8Array);
         };
         xhr.send();
-        return true;
     };
     this.show_result = function(word){
         keyword = word;
@@ -50,6 +49,7 @@ var Dictionary = function(){
         var cookie = new Cookie();
         var today = (new Date()).getDay();
         var otd;
+        db = this.db_connect();
         if(cookie.get("d") == today) {
             otd = cookie.get("0td");
         }else{
@@ -89,5 +89,5 @@ $(document).ready(function(){
     $("#suggestion").height(w_height-105);
     $(".result_set").height(w_height-75);
     $("#suggestion").width($("#keyword").width());
-    if(dict.db_connect()) dict.gen_otd();
+    dict.gen_otd();
 });
