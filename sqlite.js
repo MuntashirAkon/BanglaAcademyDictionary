@@ -51,7 +51,7 @@ var Dictionary = function(){
         var cookie = new Cookie();
         var today = (new Date()).getDay();
         var otd;
-        db = this.db_connect();
+        //db = this.db_connect();
         if(cookie.get("d") == today) {
             otd = cookie.get("0td");
         }else{
@@ -86,6 +86,7 @@ var Cookie = function(){
 
 
 var dict = new Dictionary();
+dict.db_connect();
 $(document).ready(function(){
     var w_height = $(window).height();
     $("#suggestion").height(w_height-105);
