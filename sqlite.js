@@ -13,16 +13,21 @@ var Dictionary = function(){
         db = new SQL.Database(uInt8Array);
     };
     this.show_result = function(word, bypass){
-        keyword = word;
+        keyword = word.trim();
+        keyword = keyword.replace(/[^A-Za-z0-9\-\s\']/g, "");
         if (!bypass){
             var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
             // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
             keyword = name[0].values[0][0];
+            this.show_image();
+        }else{
+            this.show_image(true);
         }
-        this.show_image();
+        }
         this.show_suggestions();
     };
-    this.show_image = function(){
+    this.show_image = function(replace_input){
+        if (replace_input) $('#keyword').val(keyword);
         if (keyword != "") $("#result").attr("src", img_src + keyword);
         else $("#result").attr("alt", "Word Doesn't Exist");
     };
