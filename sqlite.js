@@ -20,11 +20,13 @@ var Dictionary = function(){
         };
         xhr.send();
     };
-    this.show_result = function(word){
+    this.show_result = function(word, bypass){
         keyword = word;
-        var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
-        // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
-        keyword = name[0].values[0][0];
+        if (!bypass){
+            var name = db.exec("SELECT entry FROM dic_entries WHERE entry LIKE '" + keyword + "%' LIMIT 1");
+            // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
+            keyword = name[0].values[0][0];
+        }
         this.show_image();
         this.show_suggestions();
     };
@@ -39,7 +41,7 @@ var Dictionary = function(){
         $("#suggestion").html("");
         var selectedClass = "";
         for(var i = 0; i < suggestions.length; i++){
-            selectedClass = (suggestions[i][0] == word) ? " selected" : "";
+            selectedClass = (suggestions[i][0] == keyword) ? " selected" : "";
             $("#suggestion").append("<div class='word" + selectedClass + "' onclick=\"$('#keyword').val($(this).html());dict.show_result($(this).html());$('#otd').hide()\">" + suggestions[i][0] + "</div>");
         }
         // Scroll to the selected query
@@ -59,7 +61,7 @@ var Dictionary = function(){
             cookie.set("0td", otd, expire);
             cookie.set("d", today, expire);
         }
-        this.show_result(otd);
+        this.show_result(otd, true);
     };
 };
 
