@@ -5,7 +5,6 @@
 
 
 var Dictionary = function(){
-    var db_src = "/BanglaAcademyDictionary/dictionary.db";
     var img_src = "https://raw.githubusercontent.com/mujtahid-akon/English-to-Bangla-Dictionary/master/images/";
     var db;
     var keyword;
@@ -85,10 +84,11 @@ $(document).ready(function(){
     $("#suggestion").height(w_height-105);
     $(".result_set").height(w_height-75);
     $("#suggestion").width($("#keyword").width());
+    
+    var db_src = "/BanglaAcademyDictionary/dictionary.db";
     var xhr = new XMLHttpRequest();
     xhr.open('GET', db_src, true);
     xhr.responseType = 'arraybuffer';
-
     xhr.onload = function(e) {
         var dict = new Dictionary();
         dict.gen_otd();
