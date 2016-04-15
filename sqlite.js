@@ -9,17 +9,10 @@ var Dictionary = function(){
     var img_src = "https://raw.githubusercontent.com/mujtahid-akon/English-to-Bangla-Dictionary/master/images/";
     var db;
     var keyword;
-    var __construct = function(){  // connect db
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', db_src, true);
-        xhr.responseType = 'arraybuffer';
-    
-        xhr.onload = function(e) {
-            var uInt8Array = new Uint8Array(this.response);
-            db = new SQL.Database(uInt8Array);
-        };
-        xhr.send();
-    }();
+    var __construct = function(array){  // connect db
+        var uInt8Array = new Uint8Array(array);
+        db = new SQL.Database(uInt8Array);
+    }(this);
     this.show_result = function(word, bypass){
         keyword = word;
         if (!bypass){
@@ -85,12 +78,20 @@ var Cookie = function(){
 };
 
 
-var dict = new Dictionary();
+
 //dict.db_connect();
 $(document).ready(function(){
     var w_height = $(window).height();
     $("#suggestion").height(w_height-105);
     $(".result_set").height(w_height-75);
     $("#suggestion").width($("#keyword").width());
-    dict.gen_otd();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', db_src, true);
+    xhr.responseType = 'arraybuffer';
+
+    xhr.onload = function(e) {
+        var dict = new Dictionary();
+        dict.gen_otd();
+    };
+    xhr.send();
 });
