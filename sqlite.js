@@ -23,7 +23,6 @@ var Dictionary = function(){
         }else{
             this.show_image(true);
         }
-        }
         this.show_suggestions();
     };
     this.show_image = function(replace_input){
