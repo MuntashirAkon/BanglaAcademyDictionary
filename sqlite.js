@@ -9,9 +9,9 @@ var Dictionary = function(){
     var img_src = "https://raw.githubusercontent.com/mujtahid-akon/English-to-Bangla-Dictionary/master/images/";
     var db;
     var keyword;
-    this.db_connect = function(){
+    var __construct = function(){  // connect db
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/BanglaAcademyDictionary/dictionary.db', true);
+        xhr.open('GET', db_src, true);
         xhr.responseType = 'arraybuffer';
     
         xhr.onload = function(e) {
@@ -19,7 +19,7 @@ var Dictionary = function(){
             db = new SQL.Database(uInt8Array);
         };
         xhr.send();
-    };
+    }();
     this.show_result = function(word, bypass){
         keyword = word;
         if (!bypass){
@@ -86,7 +86,7 @@ var Cookie = function(){
 
 
 var dict = new Dictionary();
-dict.db_connect();
+//dict.db_connect();
 $(document).ready(function(){
     var w_height = $(window).height();
     $("#suggestion").height(w_height-105);
